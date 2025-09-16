@@ -16,6 +16,7 @@
   <div id="joystick" style="position:fixed;left:0;right:0;bottom:0;z-index:10;display:none;pointer-events:auto;">
     <div style="display:flex;justify-content:center;align-items:end;height:120px;gap:40px;">
   <button id="btnLeft" style="width:70px;height:70px;border-radius:50%;font-size:2em;opacity:0.85;pointer-events:auto;touch-action:none;background:#2d8cff;color:#fff;border:3px solid #fff;">◀️</button>
+  <button id="btnDown" style="width:70px;height:70px;border-radius:50%;font-size:2em;opacity:0.85;pointer-events:auto;touch-action:none;background:#43a047;color:#fff;border:3px solid #fff;">🔽</button>
   <button id="btnJump" style="width:70px;height:70px;border-radius:50%;font-size:2em;opacity:0.85;pointer-events:auto;touch-action:none;background:#ffb300;color:#fff;border:3px solid #fff;">⏫</button>
   <button id="btnRight" style="width:70px;height:70px;border-radius:50%;font-size:2em;opacity:0.85;pointer-events:auto;touch-action:none;background:#2d8cff;color:#fff;border:3px solid #fff;">▶️</button>
     </div>
@@ -36,7 +37,8 @@
       const btnLeft = document.getElementById('btnLeft');
       const btnRight = document.getElementById('btnRight');
       const btnJump = document.getElementById('btnJump');
-      if (!btnLeft || !btnRight || !btnJump) return;
+      const btnDown = document.getElementById('btnDown');
+      if (!btnLeft || !btnRight || !btnJump || !btnDown) return;
 
       function pressKey(key) {
         window.dispatchEvent(new KeyboardEvent('keydown', { key: key, bubbles: true }));
@@ -58,6 +60,10 @@
       btnJump.addEventListener('touchend', e => { e.preventDefault(); releaseKey(' '); }, {passive:false});
       btnJump.addEventListener('touchcancel', e => { e.preventDefault(); releaseKey(' '); }, {passive:false});
 
+      btnDown.addEventListener('touchstart', e => { e.preventDefault(); pressKey('ArrowDown'); }, {passive:false});
+      btnDown.addEventListener('touchend', e => { e.preventDefault(); releaseKey('ArrowDown'); }, {passive:false});
+      btnDown.addEventListener('touchcancel', e => { e.preventDefault(); releaseKey('ArrowDown'); }, {passive:false});
+
       // Mouse (para desktop/teste)
       btnLeft.addEventListener('mousedown', e => { e.preventDefault(); pressKey('ArrowLeft'); });
       btnLeft.addEventListener('mouseup', e => { e.preventDefault(); releaseKey('ArrowLeft'); });
@@ -70,6 +76,10 @@
       btnJump.addEventListener('mousedown', e => { e.preventDefault(); pressKey(' '); });
       btnJump.addEventListener('mouseup', e => { e.preventDefault(); releaseKey(' '); });
       btnJump.addEventListener('mouseleave', e => { e.preventDefault(); releaseKey(' '); });
+
+      btnDown.addEventListener('mousedown', e => { e.preventDefault(); pressKey('ArrowDown'); });
+      btnDown.addEventListener('mouseup', e => { e.preventDefault(); releaseKey('ArrowDown'); });
+      btnDown.addEventListener('mouseleave', e => { e.preventDefault(); releaseKey('ArrowDown'); });
     }
     window.addEventListener('DOMContentLoaded', setupUniversalJoystick);
   </script>
