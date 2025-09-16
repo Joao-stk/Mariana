@@ -15,22 +15,63 @@
   <!-- Joystick virtual para mobile -->
   <div id="joystick" style="position:fixed;left:0;right:0;bottom:0;z-index:10;display:none;pointer-events:auto;">
     <div style="display:flex;justify-content:center;align-items:end;height:120px;gap:40px;">
-      <button id="btnLeft" style="width:70px;height:70px;border-radius:50%;font-size:2em;opacity:0.7;pointer-events:auto;touch-action:none;">◀️</button>
-      <button id="btnJump" style="width:70px;height:70px;border-radius:50%;font-size:2em;opacity:0.7;pointer-events:auto;touch-action:none;">⏫</button>
-      <button id="btnRight" style="width:70px;height:70px;border-radius:50%;font-size:2em;opacity:0.7;pointer-events:auto;touch-action:none;">▶️</button>
+  <button id="btnLeft" style="width:70px;height:70px;border-radius:50%;font-size:2em;opacity:0.85;pointer-events:auto;touch-action:none;background:#2d8cff;color:#fff;border:3px solid #fff;">◀️</button>
+  <button id="btnJump" style="width:70px;height:70px;border-radius:50%;font-size:2em;opacity:0.85;pointer-events:auto;touch-action:none;background:#ffb300;color:#fff;border:3px solid #fff;">⏫</button>
+  <button id="btnRight" style="width:70px;height:70px;border-radius:50%;font-size:2em;opacity:0.85;pointer-events:auto;touch-action:none;background:#2d8cff;color:#fff;border:3px solid #fff;">▶️</button>
     </div>
   </div>
 
   <script>
-    // Exibe joystick só em touch/mobile
+    // Exibe joystick em touch/mobile OU se for forçado (para testes)
     function isTouchDevice() {
       return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     }
     if (isTouchDevice()) {
       document.getElementById('joystick').style.display = 'block';
-      // Garante que pointer-events estejam ativos
       document.getElementById('joystick').style.pointerEvents = 'auto';
     }
+
+    // Suporte universal: mouse e touch
+    function setupUniversalJoystick() {
+      const btnLeft = document.getElementById('btnLeft');
+      const btnRight = document.getElementById('btnRight');
+      const btnJump = document.getElementById('btnJump');
+      if (!btnLeft || !btnRight || !btnJump) return;
+
+      function pressKey(key) {
+        window.dispatchEvent(new KeyboardEvent('keydown', { key: key, bubbles: true }));
+      }
+      function releaseKey(key) {
+        window.dispatchEvent(new KeyboardEvent('keyup', { key: key, bubbles: true }));
+      }
+
+      // Touch
+      btnLeft.addEventListener('touchstart', e => { e.preventDefault(); pressKey('ArrowLeft'); }, {passive:false});
+      btnLeft.addEventListener('touchend', e => { e.preventDefault(); releaseKey('ArrowLeft'); }, {passive:false});
+      btnLeft.addEventListener('touchcancel', e => { e.preventDefault(); releaseKey('ArrowLeft'); }, {passive:false});
+
+      btnRight.addEventListener('touchstart', e => { e.preventDefault(); pressKey('ArrowRight'); }, {passive:false});
+      btnRight.addEventListener('touchend', e => { e.preventDefault(); releaseKey('ArrowRight'); }, {passive:false});
+      btnRight.addEventListener('touchcancel', e => { e.preventDefault(); releaseKey('ArrowRight'); }, {passive:false});
+
+      btnJump.addEventListener('touchstart', e => { e.preventDefault(); pressKey(' '); }, {passive:false});
+      btnJump.addEventListener('touchend', e => { e.preventDefault(); releaseKey(' '); }, {passive:false});
+      btnJump.addEventListener('touchcancel', e => { e.preventDefault(); releaseKey(' '); }, {passive:false});
+
+      // Mouse (para desktop/teste)
+      btnLeft.addEventListener('mousedown', e => { e.preventDefault(); pressKey('ArrowLeft'); });
+      btnLeft.addEventListener('mouseup', e => { e.preventDefault(); releaseKey('ArrowLeft'); });
+      btnLeft.addEventListener('mouseleave', e => { e.preventDefault(); releaseKey('ArrowLeft'); });
+
+      btnRight.addEventListener('mousedown', e => { e.preventDefault(); pressKey('ArrowRight'); });
+      btnRight.addEventListener('mouseup', e => { e.preventDefault(); releaseKey('ArrowRight'); });
+      btnRight.addEventListener('mouseleave', e => { e.preventDefault(); releaseKey('ArrowRight'); });
+
+      btnJump.addEventListener('mousedown', e => { e.preventDefault(); pressKey(' '); });
+      btnJump.addEventListener('mouseup', e => { e.preventDefault(); releaseKey(' '); });
+      btnJump.addEventListener('mouseleave', e => { e.preventDefault(); releaseKey(' '); });
+    }
+    window.addEventListener('DOMContentLoaded', setupUniversalJoystick);
   </script>
   <script src="game_joao.js"></script>
 </body>
