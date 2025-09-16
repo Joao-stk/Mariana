@@ -13,11 +13,11 @@
   <p>Use as setas para mover. Colete as flores!</p>
 
   <!-- Joystick virtual para mobile -->
-  <div id="joystick" style="position:fixed;left:0;right:0;bottom:0;z-index:10;display:none;pointer-events:none;">
+  <div id="joystick" style="position:fixed;left:0;right:0;bottom:0;z-index:10;display:none;pointer-events:auto;">
     <div style="display:flex;justify-content:center;align-items:end;height:120px;gap:40px;">
-      <button id="btnLeft" style="width:70px;height:70px;border-radius:50%;font-size:2em;opacity:0.7;pointer-events:auto;">◀️</button>
-      <button id="btnJump" style="width:70px;height:70px;border-radius:50%;font-size:2em;opacity:0.7;pointer-events:auto;">⏫</button>
-      <button id="btnRight" style="width:70px;height:70px;border-radius:50%;font-size:2em;opacity:0.7;pointer-events:auto;">▶️</button>
+      <button id="btnLeft" style="width:70px;height:70px;border-radius:50%;font-size:2em;opacity:0.7;pointer-events:auto;touch-action:none;">◀️</button>
+      <button id="btnJump" style="width:70px;height:70px;border-radius:50%;font-size:2em;opacity:0.7;pointer-events:auto;touch-action:none;">⏫</button>
+      <button id="btnRight" style="width:70px;height:70px;border-radius:50%;font-size:2em;opacity:0.7;pointer-events:auto;touch-action:none;">▶️</button>
     </div>
   </div>
 
@@ -28,6 +28,8 @@
     }
     if (isTouchDevice()) {
       document.getElementById('joystick').style.display = 'block';
+      // Garante que pointer-events estejam ativos
+      document.getElementById('joystick').style.pointerEvents = 'auto';
     }
   </script>
   <script src="game_joao.js"></script>
