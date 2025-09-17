@@ -56,9 +56,9 @@
       btnRight.addEventListener('touchend', e => { e.preventDefault(); releaseKey('ArrowRight'); }, {passive:false});
       btnRight.addEventListener('touchcancel', e => { e.preventDefault(); releaseKey('ArrowRight'); }, {passive:false});
 
-      btnJump.addEventListener('touchstart', e => { e.preventDefault(); pressKey(' '); }, {passive:false});
-      btnJump.addEventListener('touchend', e => { e.preventDefault(); releaseKey(' '); }, {passive:false});
-      btnJump.addEventListener('touchcancel', e => { e.preventDefault(); releaseKey(' '); }, {passive:false});
+  btnJump.addEventListener('touchstart', e => { e.preventDefault(); pressKey('ArrowUp'); }, {passive:false});
+  btnJump.addEventListener('touchend', e => { e.preventDefault(); releaseKey('ArrowUp'); }, {passive:false});
+  btnJump.addEventListener('touchcancel', e => { e.preventDefault(); releaseKey('ArrowUp'); }, {passive:false});
 
       btnDown.addEventListener('touchstart', e => { e.preventDefault(); pressKey('ArrowDown'); }, {passive:false});
       btnDown.addEventListener('touchend', e => { e.preventDefault(); releaseKey('ArrowDown'); }, {passive:false});
@@ -73,9 +73,9 @@
       btnRight.addEventListener('mouseup', e => { e.preventDefault(); releaseKey('ArrowRight'); });
       btnRight.addEventListener('mouseleave', e => { e.preventDefault(); releaseKey('ArrowRight'); });
 
-      btnJump.addEventListener('mousedown', e => { e.preventDefault(); pressKey(' '); });
-      btnJump.addEventListener('mouseup', e => { e.preventDefault(); releaseKey(' '); });
-      btnJump.addEventListener('mouseleave', e => { e.preventDefault(); releaseKey(' '); });
+  btnJump.addEventListener('mousedown', e => { e.preventDefault(); pressKey('ArrowUp'); });
+  btnJump.addEventListener('mouseup', e => { e.preventDefault(); releaseKey('ArrowUp'); });
+  btnJump.addEventListener('mouseleave', e => { e.preventDefault(); releaseKey('ArrowUp'); });
 
       btnDown.addEventListener('mousedown', e => { e.preventDefault(); pressKey('ArrowDown'); });
       btnDown.addEventListener('mouseup', e => { e.preventDefault(); releaseKey('ArrowDown'); });
